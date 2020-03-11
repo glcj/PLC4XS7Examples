@@ -1,4 +1,4 @@
-#_**PLC4XS7Examples**_
+PLC4XS7Examples
 
 Examples for the use of communication libraries developed in the Apache PLC4X project.
 
