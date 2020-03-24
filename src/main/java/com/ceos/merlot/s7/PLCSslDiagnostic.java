@@ -45,9 +45,9 @@ public class PLCSslDiagnostic {
             System.out.println("URL: https://cache.industry.siemens.com/dl/files/604/44240604/att_67003/v1/s7sfc_en-EN.pdf");
             System.out.println("***********************************************\r\n");
             
-            System.out.println("Request: SSL_ID=16#00A0;INDEX=16#0000");
+            System.out.println("Request: SSL_ID=16#001C;INDEX=16#0000");
             PlcReadRequest.Builder sslbuilder = plcConnection.readRequestBuilder();
-            sslbuilder.addItem("MySSL", "SSL_ID=16#00A0;INDEX=16#0000");
+            sslbuilder.addItem("MySSL", "SSL_ID=16#011C;INDEX=16#000A");
             PlcReadRequest sslReadRequest = sslbuilder.build();  
             
             PlcReadResponse sslresponse = sslReadRequest.execute().get(2, TimeUnit.SECONDS);
@@ -58,7 +58,7 @@ public class PLCSslDiagnostic {
                 System.out.println("DATA: \r\n" + ByteBufUtil.prettyHexDump(data));
                 System.out.println("");
                 
-                SSL ssl = SSL.valueOf(0x00A0);
+                SSL ssl = SSL.valueOf(0x001C);
                 StringBuilder sb =  ssl.execute(data);
                 System.out.println(sb.toString());                
             } else if (sslresponse.getResponseCode("MySSL") == PlcResponseCode.NOT_FOUND){
