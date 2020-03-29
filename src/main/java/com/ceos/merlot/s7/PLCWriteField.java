@@ -34,7 +34,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Writing example for simple and complex types.
  * @author cgarcia
  */
 public class PLCWriteField {

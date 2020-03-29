@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Reading example for simple and complex types.
  * @author cgarcia
  */
 public class PLCReadField {
@@ -43,7 +43,6 @@ public class PLCReadField {
         // TODO code application logic here
         try (PlcConnection plcConnection = new PlcDriverManager().getConnection("s7://192.168.1.23/0/2")){
             PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();  
-
             
             /****************************************************************
              * Test for S7300/S7400

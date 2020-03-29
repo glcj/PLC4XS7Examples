@@ -11,16 +11,39 @@ If you find this information useful, feel free to collaborate with the project.
 
 If you are not a programmer, you can document or promote the use of this tool.
 
+To run the sample programs, the version hosted at https://github.com/glcj/plc4x (s7alarm branch) is required. This version is expected to become part of version 0.6.1 (LTS) of the PLC4X master branch in the near future.
+
+What is the added value?
+
+1. The event handling of the S7300 & S7400 PLCs. While these devices have been with us for a couple of decades now, there is little benefit to be gained from their notification and event systems. Siemens' own applications take full advantage and are effective, such as Braumat Classic and PCS7.
+
+2. Optimize the request of items from the controller through the cyclical subscriptions, which allows an efficient use of the resources of the controllers especially for embedded equipment.
+
+3. Support for native data types, such as S5TIME.
+
+others,
+
+Many of these features are available on the S7-1500 in its own version of the protocol. Unfortunately this is not open, allowing only PUT / GET functions. Event handling is proprietary, which is a shame.
+
+The examples indicated below each represent the most basic possible handling of the features to be exploited, to facilitate the introduction to the use of the PLC4X libraries.
+
+I hope you find it useful,
+
 
 File | Description
 ------------ | -------------
-PLCReadWriteTime | Example for Read and Write time type for S7300 & S7400
+PLCEventSubscription | Example of subscription to PLC events (USR, SYS, MODE, ALM_8, ALM_S).
+PLCItemSubscription | Example of cyclical subscription from the PLC.
 PLCJira1799 | Example to demonstrate data support according to PLC4X Jira-179
-PLCWriteField | Writing example for simple and complex types.
 PLCReadField | Reading example for simple and complex types.
+PLCReadWriteTimes | Example for Read and Write time type for S7300 & S7400
+PLCSslDiagnostic | Example of reading the partial diagnostic list of the PLC.
+PLCWriteField | Writing example for simple and complex types.
+
 
 
 *Possible SSL Partial Lists:*
+
 The interpretation of the information is done in the _S7Helper.java_ class.
 
 
@@ -49,7 +72,3 @@ Module diagnostic information (data record 0)             |    16#xyB1   |
 Module diagnostic information (data record 1),geographical address |    16#xyB2   |
 Module diagnostic information (data record 1), logical address|    16#xyB3   |
 Diagnostic data of a DP slave                             | 16#xyB4   |
-
-
-
-

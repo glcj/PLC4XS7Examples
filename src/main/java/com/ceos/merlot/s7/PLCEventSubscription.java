@@ -1,10 +1,26 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+
 package com.ceos.merlot.s7;
 
+import java.time.Instant;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -19,7 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Example of subscription to PLC events (USR, SYS, MODE, ALM_8, ALM_S).
  * @author cgarcia
  */
 public class PLCEventSubscription {
@@ -31,11 +47,11 @@ public class PLCEventSubscription {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        try (PlcConnection plcConnection = new PlcDriverManager().getConnection("s7://192.168.1.10/0/3")){
+        try (PlcConnection plcConnection = new PlcDriverManager().getConnection("s7://192.168.1.34/0/1")){
             S7PlcConnection comm = (S7PlcConnection) plcConnection ;
             
             
-            /*
+            /*  
             * Individual constructors for each type of event.
             * USR:  User events.
             * SYS:  System events
@@ -100,7 +116,20 @@ public class PLCEventSubscription {
             
             Consumer<PlcSubscriptionEvent> eventAlmConsumer = (event) -> {
                 Map<String, Object> map = (Map<String, Object>)event.getObject(S7AlarmEvent.Fields.MAP.name());
-                System.out.println("Consumiendo mensajes ALM " + map.toString());
+                byte type = (byte) map.get(S7AlarmEvent.Fields.TYPE.name());
+                System.out.println("Type: " + map.get(S7AlarmEvent.Fields.TYPE.name()));
+                System.out.println("Event id: " + ((int) map.get(S7AlarmEvent.Fields.EVENT_ID.name())));
+                System.out.println("Time stamp: " + ((Instant) map.get(S7AlarmEvent.Fields.TIMESTAMP.name())));
+                System.out.println("SIG_1_DATA: " + Arrays.toString(((byte[]) map.get("SIG_1_DATA"))));
+                System.out.println("SIG_2_DATA: " + Arrays.toString(((byte[]) map.get("SIG_2_DATA"))));
+                System.out.println("SIG_3_DATA: " + Arrays.toString(((byte[]) map.get("SIG_3_DATA"))));
+                System.out.println("SIG_4_DATA: " + Arrays.toString(((byte[]) map.get("SIG_4_DATA"))));
+                System.out.println("SIG_5_DATA: " + Arrays.toString(((byte[]) map.get("SIG_5_DATA"))));
+                System.out.println("SIG_6_DATA: " + Arrays.toString(((byte[]) map.get("SIG_6_DATA"))));
+                System.out.println("SIG_7_DATA: " + Arrays.toString(((byte[]) map.get("SIG_7_DATA"))));
+                System.out.println("SIG_8_DATA: " + Arrays.toString(((byte[]) map.get("SIG_8_DATA"))));
+                System.out.println("SIG_9_DATA: " + Arrays.toString(((byte[]) map.get("SIG_9_DATA"))));
+                System.out.println("SIG_10_DATA: " + Arrays.toString(((byte[]) map.get("SIG_10_DATA"))));                
             }; 
             
             Consumer<PlcSubscriptionEvent> eventAllConsumer = (event) -> {
@@ -155,7 +184,7 @@ public class PLCEventSubscription {
             
             System.out.println("QUERY ALARM_S: " + queryResponse.getResponseCode("theQuery"));            
             
-            Thread.sleep(90000);
+            Thread.sleep(190000);
             
             System.out.println("Bye...");
             

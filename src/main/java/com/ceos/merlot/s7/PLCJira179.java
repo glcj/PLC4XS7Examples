@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Example to demonstrate data support according to PLC4X Jira-179
  * @author cgarcia
  */
 public class PLCJira179 {

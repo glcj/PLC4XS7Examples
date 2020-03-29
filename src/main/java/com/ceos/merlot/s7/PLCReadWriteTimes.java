@@ -37,7 +37,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Example for Read and Write time type for S7300 & S7400
  * @author cgarcia
  */
 public class PLCReadWriteTimes {
